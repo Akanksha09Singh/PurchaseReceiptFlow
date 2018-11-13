@@ -1,0 +1,90 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="CheckPaperworkAvailablefromDriver" description="Check Paperwork  Available from Driver" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_mQbm_Register_Arrival" name="Register_Arrival"/>
+        <output id="_WVKU_Paperwork_Available_Response" name="Paperwork_Available_Response"/>
+        <input id="_mjT3_Assignee" name="Assignee"/>
+        <output id="_xzUf_Register_Arrival" name="Register_Arrival"/>
+        <task-model>{
+	"schema": {
+		"title": "Check Paperwork  Available from Driver",
+		"type": "object",
+      	"required": [
+			"Paperwork_Available_Response"
+		],
+
+		"properties": {
+			"Register_Arrival": {
+				"title": "Registered Arrival Details",
+				"type": "object",
+				"properties": {
+					"Truck_Number": {
+						"title": "Truck Number",
+						"type": "string",
+						"description": "Truck Number"
+					},
+					 "Driver_ID":{
+                        "title": "Driver ID",
+                        "type": "string",
+                        "description": "Driver ID"
+					},
+					"Driver_Name": {
+						"title": "Driver Name",
+						"type": "string",
+						"description": "Driver Name"
+					},
+					"Driver_Details": {
+						"title": "Driver Details",
+						"type": "string",
+						"description": "Driver Details"
+					},
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					}
+				}
+			},
+			"Paperwork_Available_Response": {
+				"title": "Paperwork Available Response",
+				"type": "object",
+				"properties": {
+					"Paperwork_Available_Response_Status": {
+						"title": "Enter the Paperwork Available status",
+						"type": "string",
+                      	"enumNames":[
+              				"Available",
+              				"Unavailable"
+            			],
+						"enum": [
+							"Available",
+              				"Unavailable"
+						]
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Register_Arrival": {
+			"ui:order": ["Truck_Number", "Driver_Name", "Driver_ID", "Driver_Details", "Supplier_Name"],
+			"Truck_Number": {
+				"ui:readonly": true
+			},
+			"Driver_Name": {
+				"ui:readonly": true
+			},
+			"Driver_ID": {
+				"ui:readonly": true
+			},
+			"Driver_Details": {
+				"ui:readonly": true
+			},
+			"Supplier_Name": {
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+    </cafienne:implementation>
+</humantask>

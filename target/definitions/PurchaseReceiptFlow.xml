@@ -1,0 +1,1844 @@
+<definitions>
+    <case description="Purchase Receipt Flow" id="PurchaseReceiptFlow.case" name="PurchaseReceiptFlow">
+        <caseFileModel>
+            <caseFileItem definitionRef="register_arrival.cfid" id="_voqSc_22" multiplicity="ExactlyOne" name="Register_Arrival" />
+            <caseFileItem definitionRef="paperwork_available_response.cfid" id="_voqSc_11" multiplicity="ExactlyOne" name="Paperwork_Available_Response" />
+            <caseFileItem definitionRef="purchase_details.cfid" id="_voqSc_39" multiplicity="ExactlyOne" name="Purchase_Details" />
+            <caseFileItem definitionRef="receipt_details.cfid" id="_voqSc_40" multiplicity="ExactlyOne" name="Receipt_Details" />
+            <caseFileItem definitionRef="inspection_required.cfid" id="_voqSc_42" multiplicity="ExactlyOne" name="Inspection_Required" />
+            <caseFileItem definitionRef="inspection_status.cfid" id="_voqSc_49" multiplicity="ExactlyOne" name="Inspection_Status" />
+            <caseFileItem definitionRef="put_away_advice_number.cfid" id="_voqSc_138" multiplicity="ExactlyOne" name="Put_Away_Advice_Number" />
+            <caseFileItem definitionRef="supplier_details.cfid" id="_voqSc_139" multiplicity="ExactlyOne" name="Supplier_Details" />
+            <caseFileItem definitionRef="supplier_phone.cfid" id="_voqSc_140" multiplicity="ExactlyOne" name="Supplier_Phone" />
+            <caseFileItem definitionRef="project_goods_storage_location.cfid" id="_voqSc_177" multiplicity="ExactlyOne" name="Project_Goods_Storage_Location" />
+        </caseFileModel>
+        <casePlanModel autoComplete="true" exitCriteriaRefs="crit__voqSc_22 crit__voqSc_16" id="cm__voqSc_0" name="PurchaseReceiptFlow">
+            <planItem definitionRef="ht__voqSc_0" id="pi_ht__voqSc_0" name="Register Arrival" />
+            <planItem definitionRef="ms__voqSc_0" entryCriteriaRefs="crit__voqSc_0" id="pi_ms__voqSc_0" name="Arrival Registration Completed" />
+            <planItem definitionRef="_voqSc_9" entryCriteriaRefs="crit__voqSc_25" id="pi__voqSc_9" name="Obtaining Shipment Receipt" />
+            <planItem definitionRef="ms__voqSc_4" entryCriteriaRefs="crit__voqSc_6" id="pi_ms__voqSc_4" name="Shipment Receipt Obtained" />
+            <planItem definitionRef="_voqSc_20" entryCriteriaRefs="crit__voqSc_1" id="pi__voqSc_20" name="Issuing Goods Received Receipt" />
+            <planItem definitionRef="_voqSc_32" entryCriteriaRefs="crit__voqSc_12" id="pi__voqSc_32" name="Inspecting the Goods" />
+            <planItem definitionRef="_voqSc_34" entryCriteriaRefs="crit__voqSc_11 crit__voqSc_18 crit__voqSc_19" id="pi__voqSc_34" name="Determining the storage location" />
+            <planItem definitionRef="ms__voqSc_1" entryCriteriaRefs="crit__voqSc_9" id="pi_ms__voqSc_1" name="Inspection Completed" />
+            <planItem definitionRef="ms__voqSc_2" entryCriteriaRefs="crit__voqSc_2" id="pi_ms__voqSc_2" name="Goods Received Receipt Issued" />
+            <planItem definitionRef="ms__voqSc_5" entryCriteriaRefs="crit__voqSc_20" id="pi_ms__voqSc_5" name="Storage location determined" />
+            <planItem definitionRef="ms__voqSc_3" entryCriteriaRefs="crit__voqSc_10" id="pi_ms__voqSc_3" name="Goods Rejected" />
+            <sentry id="crit__voqSc_0" name="Sentry_0">
+                <planItemOnPart id="_voqSc_8" name="PlanItemOnPart_0" sourceRef="pi_ht__voqSc_0">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_12" name="Sentry_12">
+                <ifPart contextRef="_voqSc_42" id="_voqSc_100" name="IfPart_4">
+                    <condition id="_voqSc_101" language="spel" name="Expression_4">
+                        <body>
+                        Inspection_Required.Inspection_Required_Status== "Yes"
+                    </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_voqSc_99" name="PlanItemOnPart_12" sourceRef="pi__voqSc_20">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_2" name="Sentry_2">
+                <ifPart contextRef="_voqSc_42" id="_voqSc_145" name="IfPart_8">
+                    <condition id="_voqSc_147" language="spel" name="Expression_8">
+                        <body>
+                        Inspection_Required.Inspection_Required_Status== "No"
+                    </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_voqSc_105" name="PlanItemOnPart_2" sourceRef="pi__voqSc_20">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_6" name="Sentry_6">
+                <planItemOnPart id="_voqSc_168" name="PlanItemOnPart_6" sourceRef="pi_ht__voqSc_10">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+                <planItemOnPart id="_voqSc_269" name="PlanItemOnPart_21" sourceRef="pi__voqSc_9">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_1" name="Sentry_1">
+                <planItemOnPart id="_voqSc_57" name="PlanItemOnPart_1" sourceRef="pi_ms__voqSc_4">
+                    <standardEvent>occur</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_11" name="Sentry_11">
+                <planItemOnPart id="_voqSc_86" name="PlanItemOnPart_11" sourceRef="pi_ms__voqSc_2">
+                    <standardEvent>occur</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_20" name="Sentry_20">
+                <planItemOnPart id="_voqSc_135" name="PlanItemOnPart_19" sourceRef="pi__voqSc_34">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_22" name="Sentry_22">
+                <planItemOnPart id="_voqSc_136" name="PlanItemOnPart_20" sourceRef="pi_ms__voqSc_5">
+                    <standardEvent>occur</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_16" name="Sentry_16">
+                <ifPart contextRef="_voqSc_11" id="_voqSc_104" name="IfPart_3">
+                    <condition id="_voqSc_131" language="spel" name="Expression_3">
+                        <body>
+                        Paperwork_Available_Response.Paperwork_Available_Response_Status =="Unavailable"
+                    </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_voqSc_10" name="PlanItemOnPart_16" sourceRef="pi_ht__voqSc_11">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_9" name="Sentry_9">
+                <ifPart contextRef="_voqSc_40" id="_voqSc_23" name="IfPart_5">
+                    <condition id="_voqSc_79" language="spel" name="Expression_5">
+                        <body>
+                        Receipt_Details.Inspection_Results== "Inspected"
+                    </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_voqSc_21" name="PlanItemOnPart_9" sourceRef="pi_ht__voqSc_8">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+                <planItemOnPart id="_voqSc_166" name="PlanItemOnPart_24" sourceRef="pi__voqSc_32">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_10" name="Sentry_10">
+                <planItemOnPart id="_voqSc_30" name="PlanItemOnPart_23" sourceRef="pi_ht__voqSc_7">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+                <planItemOnPart id="_voqSc_41" name="PlanItemOnPart_25" sourceRef="pi__voqSc_32">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_18" name="Sentry_18">
+                <planItemOnPart id="_voqSc_87" name="PlanItemOnPart_18" sourceRef="pi_ms__voqSc_1">
+                    <standardEvent>occur</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_19" name="Sentry_19">
+                <planItemOnPart id="_voqSc_132" name="PlanItemOnPart_8" sourceRef="pi_ms__voqSc_3">
+                    <standardEvent>occur</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__voqSc_25" name="Sentry_25">
+                <planItemOnPart id="_voqSc_187" name="PlanItemOnPart_22" sourceRef="pi_ms__voqSc_0">
+                    <standardEvent>occur</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <humanTask id="ht__voqSc_0" isBlocking="true" name="Register Arrival">
+                <inputs bindingRef="_voqSc_22" id="_voqSc_236" name="Register_Arrival" />
+                <inputs id="_voqSc_238" name="Assignee" />
+                <outputs bindingRef="_voqSc_22" id="_voqSc_244" name="Register_Arrival" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Register Arrival" name="RegisterArrival" xmlns:cafienne="org.cafienne">
+                        <input id="_kgVX_Register_Arrival" name="Register_Arrival" />
+                        <input id="_L2bN_Assignee" name="Assignee" />
+                        <output id="_t5x8_Register_Arrival" name="Register_Arrival" />
+                        <task-model>{
+  "schema":{
+    "title": "Register Arrival",
+    "type": "object",
+    "required": [
+			"Register_Arrival"
+		],
+   
+    "properties":{
+      "Register_Arrival":{
+        "title": "Register Arrival",
+        "type": "object",
+        "properties":{
+          "Truck_Number":{
+            "title": "Truck Number",
+            "type": "string",
+            "description": "Truck Number"
+          },
+           "Driver_ID":{
+            "title": "Driver ID",
+            "type": "string",
+            "description": "Driver ID"
+          },
+          "Driver_Name": {
+            "title": "Driver Name",
+            "type": "string",
+            "description": "Driver Name"
+          },
+           "Driver_Details":{
+            "title": "Driver Details",
+            "type": "string",
+            "description": "Driver Details"
+          },
+           "Supplier_Name":{
+            "title": "Supplier Name",
+            "type": "string",
+            "enumNames":[
+              "Lana",
+              "Suzy",
+              "Admin"
+            ],
+            "enum":[
+              "lana",
+              "suzy",
+              "admin"
+            ]
+          }
+          }
+      }
+    }
+  },
+	"uiSchema": {
+		"Register_Arrival": {
+			"ui:order": ["Truck_Number", "Driver_ID", "Driver_Name", "Driver_Details", "Supplier_Name"]
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_237" sourceRef="_voqSc_236" targetRef="_kgVX_Register_Arrival" />
+                        <parameterMapping id="_voqSc_239" sourceRef="_voqSc_238" targetRef="_L2bN_Assignee">
+                            <transformation id="_voqSc_246" language="spel" name="Expression_11">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("Requestor")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_245" sourceRef="_t5x8_Register_Arrival" targetRef="_voqSc_244" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_1" isBlocking="true" name="Check Paperwork Available from Driver">
+                <inputs bindingRef="_voqSc_22" id="_voqSc_25" name="Register_Arrival" />
+                <inputs id="_voqSc_149" name="Assignee" />
+                <outputs bindingRef="_voqSc_11" id="_voqSc_27" name="Paperwork_Available_Response" />
+                <outputs bindingRef="_voqSc_22" id="_voqSc_171" name="Register_Arrival" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Check Paperwork  Available from Driver" name="CheckPaperworkAvailablefromDriver" xmlns:cafienne="org.cafienne">
+                        <input id="_mQbm_Register_Arrival" name="Register_Arrival" />
+                        <output id="_WVKU_Paperwork_Available_Response" name="Paperwork_Available_Response" />
+                        <input id="_mjT3_Assignee" name="Assignee" />
+                        <output id="_xzUf_Register_Arrival" name="Register_Arrival" />
+                        <task-model>{
+	"schema": {
+		"title": "Check Paperwork  Available from Driver",
+		"type": "object",
+      	"required": [
+			"Paperwork_Available_Response"
+		],
+
+		"properties": {
+			"Register_Arrival": {
+				"title": "Registered Arrival Details",
+				"type": "object",
+				"properties": {
+					"Truck_Number": {
+						"title": "Truck Number",
+						"type": "string",
+						"description": "Truck Number"
+					},
+					 "Driver_ID":{
+                        "title": "Driver ID",
+                        "type": "string",
+                        "description": "Driver ID"
+					},
+					"Driver_Name": {
+						"title": "Driver Name",
+						"type": "string",
+						"description": "Driver Name"
+					},
+					"Driver_Details": {
+						"title": "Driver Details",
+						"type": "string",
+						"description": "Driver Details"
+					},
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					}
+				}
+			},
+			"Paperwork_Available_Response": {
+				"title": "Paperwork Available Response",
+				"type": "object",
+				"properties": {
+					"Paperwork_Available_Response_Status": {
+						"title": "Enter the Paperwork Available status",
+						"type": "string",
+                      	"enumNames":[
+              				"Available",
+              				"Unavailable"
+            			],
+						"enum": [
+							"Available",
+              				"Unavailable"
+						]
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Register_Arrival": {
+			"ui:order": ["Truck_Number", "Driver_Name", "Driver_ID", "Driver_Details", "Supplier_Name"],
+			"Truck_Number": {
+				"ui:readonly": true
+			},
+			"Driver_Name": {
+				"ui:readonly": true
+			},
+			"Driver_ID": {
+				"ui:readonly": true
+			},
+			"Driver_Details": {
+				"ui:readonly": true
+			},
+			"Supplier_Name": {
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_26" sourceRef="_voqSc_25" targetRef="_mQbm_Register_Arrival" />
+                        <parameterMapping id="_voqSc_28" sourceRef="_WVKU_Paperwork_Available_Response" targetRef="_voqSc_27" />
+                        <parameterMapping id="_voqSc_4" sourceRef="_voqSc_149" targetRef="_mjT3_Assignee">
+                            <transformation id="_voqSc_220" language="spel" name="Expression_12">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("PurchaseClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_170" sourceRef="_xzUf_Register_Arrival" targetRef="_voqSc_171" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_2" isBlocking="true" name="Receive Goods">
+                <inputs bindingRef="_voqSc_39" id="_voqSc_68" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_70" name="Supplier_Details" />
+                <inputs bindingRef="_voqSc_40" id="_voqSc_72" name="Receipt_Details" />
+                <inputs id="_voqSc_76" name="Assignee" />
+                <outputs bindingRef="_voqSc_40" id="_voqSc_106" name="Receipt_Details" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Receive Goods" name="ReceiveGoods" xmlns:cafienne="org.cafienne">
+                        <input id="_8CFG_Purchase_Details" name="Purchase_Details" />
+                        <output id="_6ZBf_Receipt_Details" name="Receipt_Details" />
+                        <input id="_tZOD_Supplier_Details" name="Supplier_Details" />
+                        <input id="_fGJG_Receipt_Details" name="Receipt_Details" />
+                        <input id="_756Q_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Receive Goods",
+		"type": "object",
+		"required": [
+			"Receipt_Details"
+		],
+
+		"properties": {
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Enter Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					}
+                }
+				},
+		
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment Details"
+					}
+
+				}
+			},
+			"Supplier_Details": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+                "ui:widget": "textarea",
+				"ui:readonly": true
+			}
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_69" sourceRef="_voqSc_68" targetRef="_8CFG_Purchase_Details" />
+                        <parameterMapping id="_voqSc_71" sourceRef="_voqSc_70" targetRef="_tZOD_Supplier_Details" />
+                        <parameterMapping id="_voqSc_73" sourceRef="_voqSc_72" targetRef="_fGJG_Receipt_Details" />
+                        <parameterMapping id="_voqSc_102" sourceRef="_voqSc_76" targetRef="_756Q_Assignee">
+                            <transformation id="_voqSc_228" language="spel" name="Expression_25">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("WarehousingClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_161" sourceRef="_6ZBf_Receipt_Details" targetRef="_voqSc_106" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_3" isBlocking="true" name="Check if inspection required">
+                <inputs bindingRef="_voqSc_40" id="_voqSc_77" name="Receipt_Details" />
+                <inputs id="_voqSc_162" name="Assignee" />
+                <outputs bindingRef="_voqSc_42" id="_voqSc_81" name="Inspection_Required" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Check if inspection required" name="Checkifinspectionrequired" xmlns:cafienne="org.cafienne">
+                        <output id="_1PqV_Inspection_Required" name="Inspection_Required" />
+                        <input id="_vQLs_Receipt_Details" name="Receipt_Details" />
+                        <input id="_kgYk_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Check If Inspection Required",
+		"type": "object",
+		"required": [
+			"Inspection_Required"
+		],
+		"properties": {
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					}
+				}
+			},
+			"Inspection_Required": {
+				"title": "Inspection Required Status",
+				"type": "object",
+				"properties": {
+					"Inspection_Required_Status": {
+						"title": "Enter the Inspection Required status",
+						"type": "string",
+						"enumNames": [
+							"Yes",
+							"No"
+						],
+						"enum": [
+							"Yes",
+							"No"
+						]
+					}
+				}
+			}
+
+		}
+	},
+	"uiSchema": {
+		"Receipt_Details": {
+			"Receipt_Number": {
+				"ui:readonly": true
+			}
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_78" sourceRef="_voqSc_77" targetRef="_vQLs_Receipt_Details" />
+                        <parameterMapping id="_voqSc_82" sourceRef="_1PqV_Inspection_Required" targetRef="_voqSc_81" />
+                        <parameterMapping id="_voqSc_17" sourceRef="_voqSc_162" targetRef="_kgYk_Assignee">
+                            <transformation id="_voqSc_225" language="spel" name="Expression_17">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("WarehousingClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_4" isBlocking="true" name="Put away goods to project location">
+                <inputs bindingRef="_voqSc_138" id="_voqSc_119" name="Put_Away_Advice_Number" />
+                <inputs bindingRef="_voqSc_40" id="_voqSc_121" name="Receipt_Details" />
+                <inputs bindingRef="_voqSc_39" id="_voqSc_123" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_127" name="Supplier_Details" />
+                <inputs id="_voqSc_63" name="Assignee" />
+                <outputs bindingRef="_voqSc_138" id="_voqSc_129" name="Put_Away_Advice_Number" />
+                <outputs bindingRef="_voqSc_40" id="_voqSc_153" name="Receipt_Details" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Put away goods  to project  location" name="Putawaygoodstoprojectlocation" xmlns:cafienne="org.cafienne">
+                        <input id="_eLwm_Put_Away_Advice_Number" name="Put_Away_Advice_Number" />
+                        <output id="_Q4kv_Put_Away_Advice_Number" name="Put_Away_Advice_Number" />
+                        <input id="_bLiB_Receipt_Details" name="Receipt_Details" />
+                        <input id="_makf_Purchase_Details" name="Purchase_Details" />
+                        <input id="_QM2U_Supplier_Details" name="Supplier_Details" />
+                        <output id="_Ov16_Receipt_Details" name="Receipt_Details" />
+                        <input id="_vtTP_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Put Away Goods To Project Location",
+		"type": "object",
+		"required": [
+			"Put_Away_Advice_Number"
+		],
+
+		"properties": {
+			"Put_Away_Advice_Number": {
+				"title": "Put Away Advice Number",
+				"type": "object",
+				"properties": {
+					"Put_Away_Advice_Number": {
+						"title": "Enter Put Away Advice Number",
+						"type": "string",
+						"description": "Put Away Advice Number"
+					}
+				}
+			},
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					},
+					"Inspection_Results": {
+						"title": "Inspection Results",
+						"type": "string",
+						"description": "Inspection Results"
+					}
+				}
+			},
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment_Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment_Details"
+					}
+				}
+			},
+			"Supplier_Details": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+		},
+      "Receipt_Details": {
+        	"ui:order": ["Receipt_Number", "Inspection_Results"],
+			"Receipt_Number": {
+				"ui:readonly": true
+			},
+        	"Inspection_Results": {
+				"ui:readonly": true
+			}
+		},
+      "Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+              	"ui:widget": "textarea",
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_120" sourceRef="_voqSc_119" targetRef="_eLwm_Put_Away_Advice_Number" />
+                        <parameterMapping id="_voqSc_122" sourceRef="_voqSc_121" targetRef="_bLiB_Receipt_Details" />
+                        <parameterMapping id="_voqSc_124" sourceRef="_voqSc_123" targetRef="_makf_Purchase_Details" />
+                        <parameterMapping id="_voqSc_128" sourceRef="_voqSc_127" targetRef="_QM2U_Supplier_Details" />
+                        <parameterMapping id="_voqSc_130" sourceRef="_Q4kv_Put_Away_Advice_Number" targetRef="_voqSc_129" />
+                        <parameterMapping id="_voqSc_144" sourceRef="_voqSc_63" targetRef="_vtTP_Assignee">
+                            <transformation id="_voqSc_231" language="spel" name="Expression_23">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("WarehousingClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_64" sourceRef="_Ov16_Receipt_Details" targetRef="_voqSc_153" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_5" isBlocking="true" name="Determine Storage Location">
+                <inputs id="_voqSc_88" name="Assignee" />
+                <inputs bindingRef="_voqSc_177" id="_voqSc_111" name="Project_Goods_Storage_Location" />
+                <outputs bindingRef="_voqSc_177" id="_voqSc_125" name="Project_Goods_Storage_Location" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Determine Storage  Location" name="DetermineStorageLocation" xmlns:cafienne="org.cafienne">
+                        <input id="_9wsw_Assignee" name="Assignee" />
+                        <input id="_aEmy_Project_Goods_Storage_Location" name="Project_Goods_Storage_Location" />
+                        <output id="_NwaN_Project_Goods_Storage_Location" name="Project_Goods_Storage_Location" />
+                        <task-model>{
+  "schema":{
+    "title": "Determine Storage Location ",
+    "type": "object",
+    "required":[ 
+      "Project_Goods_Storage_Location"
+    ],
+    "properties":{
+       "Project_Goods_Storage_Location": {
+        "title": "Project Goods Storage Location",
+        "type": "object",
+        "properties": {
+          "Project_Goods_Storage_Location": {
+            "title": "Enter the Project Goods Storage Location",
+            "type": "string",
+            "enum": [
+              "Project",
+              "Anonymous"
+            ]
+          }
+        }
+      }
+      
+    }
+  }
+}</task-model>
+                        <parameterMapping id="_voqSc_103" sourceRef="_voqSc_88" targetRef="_9wsw_Assignee">
+                            <transformation id="_voqSc_93" language="spel" name="Expression_7">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("WarehousingClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_112" sourceRef="_voqSc_111" targetRef="_aEmy_Project_Goods_Storage_Location" />
+                        <parameterMapping id="_voqSc_126" sourceRef="_NwaN_Project_Goods_Storage_Location" targetRef="_voqSc_125" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_6" isBlocking="true" name="Put away goods to anonymous storage location">
+                <inputs bindingRef="_voqSc_138" id="_voqSc_107" name="Put_Away_Advice_Number" />
+                <inputs bindingRef="_voqSc_40" id="_voqSc_109" name="Receipt_Details" />
+                <inputs bindingRef="_voqSc_39" id="_voqSc_113" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_115" name="Supplier_Details" />
+                <inputs id="_voqSc_156" name="Assignee" />
+                <outputs bindingRef="_voqSc_138" id="_voqSc_117" name="Put_Away_Advice_Number" />
+                <outputs bindingRef="_voqSc_40" id="_voqSc_160" name="Receipt_Details" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Put away goods to anonymous storage location" name="PutAwayGoodsToAnonymousStorageLocation" xmlns:cafienne="org.cafienne">
+                        <input id="_49Ho_Put_Away_Advice_Number" name="Put_Away_Advice_Number" />
+                        <output id="_Q0nJ_Put_Away_Advice_Number" name="Put_Away_Advice_Number" />
+                        <input id="_aFua_Receipt_Details" name="Receipt_Details" />
+                        <input id="_u3Bf_Purchase_Details" name="Purchase_Details" />
+                        <input id="_LEGq_Supplier_Details" name="Supplier_Details" />
+                        <output id="_Xl6W_Receipt_Details" name="Receipt_Details" />
+                        <input id="_YPoW_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Put Away Goods To Anonymous Storage Location",
+		"type": "object",
+		"required": [
+			"Put_Away_Advice_Number"
+		],
+
+		"properties": {
+			"Put_Away_Advice_Number": {
+				"title": "Put Away Advice Number",
+				"type": "object",
+				"properties": {
+					"Put_Away_Advice_Number": {
+						"title": "Enter Put Away Advice Number",
+						"type": "string",
+						"description": "Put Away Advice Number"
+					}
+				}
+			},
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					},
+					"Inspection_Results": {
+						"title": "Inspection Results",
+						"type": "string",
+						"description": "Inspection Results"
+					}
+				}
+			},
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment_Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment_Details"
+					}
+				}
+			},
+			"Supplier_Details": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+		},
+      "Receipt_Details": {
+        	"ui:order": ["Receipt_Number", "Inspection_Results"],
+			"Receipt_Number": {
+				"ui:readonly": true
+			},
+        	"Inspection_Results": {
+				"ui:readonly": true
+			}
+		},
+      "Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+              	"ui:widget": "textarea",
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_108" sourceRef="_voqSc_107" targetRef="_49Ho_Put_Away_Advice_Number" />
+                        <parameterMapping id="_voqSc_110" sourceRef="_voqSc_109" targetRef="_aFua_Receipt_Details" />
+                        <parameterMapping id="_voqSc_114" sourceRef="_voqSc_113" targetRef="_u3Bf_Purchase_Details" />
+                        <parameterMapping id="_voqSc_116" sourceRef="_voqSc_115" targetRef="_LEGq_Supplier_Details" />
+                        <parameterMapping id="_voqSc_118" sourceRef="_Q0nJ_Put_Away_Advice_Number" targetRef="_voqSc_117" />
+                        <parameterMapping id="_voqSc_148" sourceRef="_voqSc_156" targetRef="_YPoW_Assignee">
+                            <transformation id="_voqSc_229" language="spel" name="Expression_21">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("WarehousingClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_158" sourceRef="_Xl6W_Receipt_Details" targetRef="_voqSc_160" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_8" isBlocking="true" name="Inspect Goods">
+                <inputs bindingRef="_voqSc_40" id="_voqSc_89" name="Receipt_Details" />
+                <inputs bindingRef="_voqSc_39" id="_voqSc_91" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_95" name="Supplier_Details" />
+                <inputs id="_voqSc_84" name="Assignee" />
+                <outputs bindingRef="_voqSc_40" id="_voqSc_97" name="Receipt_Details" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Inspect Goods" name="InspectGoods" xmlns:cafienne="org.cafienne">
+                        <input id="_dREW_Receipt_Details" name="Receipt_Details" />
+                        <input id="_UX8g_Purchase_Details" name="Purchase_Details" />
+                        <input id="_eQc3_Supplier_Details" name="Supplier_Details" />
+                        <output id="_uMMz_Receipt_Details" name="Receipt_Details" />
+                        <input id="_YFVi_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Inspect Goods",
+		"type": "object",
+		"required": [
+			"Receipt_Details"
+		],
+
+		"properties": {
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					},
+					"Inspection_Results": {
+						"title": "Inspection Results",
+						"type": "string",
+						"enumNames": [
+							"Inspected",
+							"Rejected"
+						],
+						"enum": [
+							"Inspected",
+							"Rejected"
+						]
+					}
+				}
+			},
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment Details"
+					}
+				}
+			},
+			"Supplier_Details": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Receipt_Details": {
+			"ui:order": ["Receipt_Number", "Inspection_Results"],
+			"Receipt_Number": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+				"ui:widget": "textarea",
+				"ui:readonly": true
+			}
+
+		},
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_90" sourceRef="_voqSc_89" targetRef="_dREW_Receipt_Details" />
+                        <parameterMapping id="_voqSc_92" sourceRef="_voqSc_91" targetRef="_UX8g_Purchase_Details" />
+                        <parameterMapping id="_voqSc_96" sourceRef="_voqSc_95" targetRef="_eQc3_Supplier_Details" />
+                        <parameterMapping id="_voqSc_98" sourceRef="_uMMz_Receipt_Details" targetRef="_voqSc_97" />
+                        <parameterMapping id="_voqSc_29" sourceRef="_voqSc_84" targetRef="_YFVi_Assignee">
+                            <transformation id="_voqSc_227" language="spel" name="Expression_19">
+                                <body>
+                                caseInstance.getCaseTeam().getMemberWithRole("QCClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_10" isBlocking="true" name="Register Shipment Receipt">
+                <inputs bindingRef="_voqSc_39" id="_voqSc_51" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_53" name="Supplier_Details" />
+                <inputs id="_voqSc_55" name="Assignee" />
+                <outputs bindingRef="_voqSc_39" id="_voqSc_58" name="Purchase_Details" />
+                <outputs bindingRef="_voqSc_139" id="_voqSc_66" name="Supplier_Details" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Register Shipment Receipt" name="RegisterShipmentReceipt" xmlns:cafienne="org.cafienne">
+                        <input id="_tnim_Purchase_Details" name="Purchase_Details" />
+                        <output id="_gaxV_Purchase_Details" name="Purchase_Details" />
+                        <input id="_bdPx_Supplier_Details" name="Supplier_Details" />
+                        <output id="_ZkOU_Supplier_Details" name="Supplier_Details" />
+                        <input id="_8bSG_Assignee" name="Assignee" />
+                        <task-model>{
+  "schema":{
+    "title": "Register Shipment Receipt",
+    "type": "object",
+    "required": [
+			"Purchase_Details","Supplier_Details"
+		],
+   
+    "properties":{
+      "Purchase_Details":{
+        "title": "Purchase Details",
+        "type": "object",
+        "properties":{
+          "Purchase_Order_Number":{
+            "title": "Enter Purchase Order Number",
+            "type": "string",
+            "description": "Purchase Order Number"
+          },
+          "Purchase_Order_Date": {
+            "title": "Enter Purchase Order Date",
+            "type": "string",
+            "format": "date",
+            "description": "Purchase Order Date"
+          },
+           "Shipment_Number":{
+            "title": "Enter Shipment Number",
+            "type": "string",
+            "description": "Shipment Number"
+          },
+           "Shipment_Details":{
+            "title": "Enter Shipment Details",
+            "type": "string",
+            "description": "Shipment Details"
+          }
+           
+          }
+      },
+         "Supplier_Details":{
+        "title": "Supplier Details",
+        "type": "object",
+        "properties":{
+          "Supplier_Name":{
+            "title": "Enter Supplier Name",
+            "type": "string",
+            "enumNames":[
+              "Lana",
+              "Suzy",
+              "Admin"
+            ],
+            "enum":[
+              "lana",
+              "suzy",
+              "admin"
+            ]
+          },
+          "Supplier_Address":{
+            "title": "Enter Supplier Address",
+            "type": "string",
+            "description": "Supplier Address"
+          }
+        }
+      }
+    }
+  },
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"]
+		},
+      "Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+        	"Supplier_Address": {"ui:widget": "textarea"}
+		}
+    }
+}</task-model>
+                        <parameterMapping id="_voqSc_52" sourceRef="_voqSc_51" targetRef="_tnim_Purchase_Details" />
+                        <parameterMapping id="_voqSc_54" sourceRef="_voqSc_53" targetRef="_bdPx_Supplier_Details" />
+                        <parameterMapping id="_voqSc_56" sourceRef="_voqSc_55" targetRef="_8bSG_Assignee">
+                            <transformation id="_voqSc_74" language="spel" name="Expression_13">
+                                <body>
+                                caseInstance.getCaseTeam().getMemberWithRole("PurchaseClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_65" sourceRef="_gaxV_Purchase_Details" targetRef="_voqSc_58" />
+                        <parameterMapping id="_voqSc_67" sourceRef="_ZkOU_Supplier_Details" targetRef="_voqSc_66" />
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_11" isBlocking="true" name="Call Supplier and confirm Paperwork receipt via Email">
+                <inputs bindingRef="_voqSc_11" id="_voqSc_59" name="Paperwork_Available_Response" />
+                <inputs id="_voqSc_151" name="Assignee" />
+                <inputs bindingRef="_voqSc_140" id="_voqSc_181" name="Supplier_Phone" />
+                <inputs bindingRef="_voqSc_22" id="_voqSc_182" name="Register_Arrival" />
+                <outputs bindingRef="_voqSc_11" id="_voqSc_61" name="Paperwork_Available_Response" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Call Supplier and confirm Paperwork  receipt via Email" name="CallSupplierandconfirmPaperworkreceiptviaEmail" xmlns:cafienne="org.cafienne">
+                        <output id="_LuJU_Message" name="Paperwork_Available_Response" />
+                        <input id="_NGE6_Register_Arrival" name="Paperwork_Available_Response" />
+                        <input id="_wlaJ_Assignee" name="Assignee" />
+                        <input id="_3STA_Register_Arrival" name="Register_Arrival" />
+                        <input id="_Ux18_Supplier_Phone" name="Supplier_Phone" />
+                        <task-model>{
+  "schema":{
+    "title": "Call Supplier And Confirm Paperwork Receipt via Email",
+    "type": "object",
+    "required": [
+			"Paperwork_Available_Response"
+		],
+   
+    "properties":{
+      "Register_Arrival": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					}
+				}
+			},
+       "Supplier_Phone": {
+				"type": "object",
+         		"properties": {
+					"Supplier_Phone": {
+						"title": "Supplier PhoneNumber",
+						"type": "string",
+						"description": "Supplier PhoneNumber"
+					}
+				}
+			},
+         "Paperwork_Available_Response":{
+        "title": "Paperwork Available Response",
+        "type": "object",
+        "properties":{
+          "Paperwork_Available_Response_Status":{
+            "title": "Enter Paperwork Available status",
+            "type": "string",
+            "enum":[
+              "Available",
+              "Unavailable"
+            ]
+          }
+        }
+      }      
+    }
+  },
+	"uiSchema": {
+		"Register_Arrival": {
+			"Supplier_Name": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Phone": {
+			"Supplier_Phone": {
+				"ui:readonly": true
+			}
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_60" sourceRef="_voqSc_59" targetRef="_NGE6_Register_Arrival" />
+                        <parameterMapping id="_voqSc_62" sourceRef="_LuJU_Message" targetRef="_voqSc_61" />
+                        <parameterMapping id="_voqSc_12" sourceRef="_voqSc_151" targetRef="_wlaJ_Assignee">
+                            <transformation id="_voqSc_222" language="spel" name="Expression_14">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("PurchaseClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_169" sourceRef="_voqSc_182" targetRef="_3STA_Register_Arrival">
+                            <transformation id="_voqSc_173" language="spel" name="Expression_26">
+                                <body>
+                                Register_Arrival.Supplier_Name
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                        <parameterMapping id="_voqSc_203" sourceRef="_voqSc_181" targetRef="_Ux18_Supplier_Phone">
+                            <transformation id="_voqSc_167" language="spel" name="Expression_24">
+                                <body>
+                                Supplier_Phone.Supplier_Phone
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_13" isBlocking="true" name="Put away goods to Quarantine or Rejection storage location">
+                <inputs bindingRef="_voqSc_138" id="_voqSc_190" name="Put_Away_Advice_Number" />
+                <inputs bindingRef="_voqSc_40" id="_voqSc_192" name="Receipt_Details" />
+                <inputs bindingRef="_voqSc_39" id="_voqSc_194" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_196" name="Supplier_Details" />
+                <inputs id="_voqSc_219" name="Assignee" />
+                <outputs bindingRef="_voqSc_138" id="_voqSc_212" name="Put_Away_Advice_Number" />
+                <outputs bindingRef="_voqSc_40" id="_voqSc_180" name="Receipt_Details" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Put away goods to Quarantine or Rejection storage location" name="PutAwayGoodsToQuarantineOrRejectionStorageLocation" xmlns:cafienne="org.cafienne">
+                        <input id="_xeqp_Put_Away_Advice_Number" name="Put_Away_Advice_Number" />
+                        <output id="_n6op_Put_Away_Advice_Number" name="Put_Away_Advice_Number" />
+                        <input id="_b6PY_Receipt_Details" name="Receipt_Details" />
+                        <input id="_8lKt_Purchase_Details" name="Purchase_Details" />
+                        <input id="_oqve_Supplier_Details" name="Supplier_Details" />
+                        <output id="_GWnH_Receipt_Details" name="Receipt_Details" />
+                        <input id="_Z4hI_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Put Away Goods To Quarantine Or Rejection Storage Location",
+		"type": "object",
+		"required": [
+			"Put_Away_Advice_Number"
+		],
+
+		"properties": {
+			"Put_Away_Advice_Number": {
+				"title": "Put Away Advice Number",
+				"type": "object",
+				"properties": {
+					"Put_Away_Advice_Number": {
+						"title": "Enter Put Away Advice Number",
+						"type": "string",
+						"description": "Put Away Advice Number"
+					}
+				}
+			},
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					},
+					"Inspection_Results": {
+						"title": "Inspection Results",
+						"type": "string",
+						"description": "Inspection Results"
+					}
+				}
+			},
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment_Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment_Details"
+					}
+				}
+			},
+			"Supplier_Details": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+		},
+		"Receipt_Details": {
+			"ui:order": ["Receipt_Number", "Inspection_Results"],
+			"Receipt_Number": {
+				"ui:readonly": true
+			},
+        	"Inspection_Results": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+				"ui:widget": "textarea",
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_191" sourceRef="_voqSc_190" targetRef="_xeqp_Put_Away_Advice_Number" />
+                        <parameterMapping id="_voqSc_193" sourceRef="_voqSc_192" targetRef="_b6PY_Receipt_Details" />
+                        <parameterMapping id="_voqSc_195" sourceRef="_voqSc_194" targetRef="_8lKt_Purchase_Details" />
+                        <parameterMapping id="_voqSc_205" sourceRef="_voqSc_196" targetRef="_oqve_Supplier_Details" />
+                        <parameterMapping id="_voqSc_213" sourceRef="_n6op_Put_Away_Advice_Number" targetRef="_voqSc_212" />
+                        <parameterMapping id="_voqSc_137" sourceRef="_GWnH_Receipt_Details" targetRef="_voqSc_180" />
+                        <parameterMapping id="_voqSc_183" sourceRef="_voqSc_219" targetRef="_Z4hI_Assignee">
+                            <transformation id="_voqSc_214" language="spel" name="Expression_15">
+                                <body>
+                                 caseInstance.getCaseTeam().getMemberWithRole("WarehousingClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <humanTask id="ht__voqSc_7" isBlocking="true" name="Check Reject Goods">
+                <inputs bindingRef="_voqSc_40" id="_voqSc_85" name="Receipt_Details" />
+                <inputs bindingRef="_voqSc_39" id="_voqSc_150" name="Purchase_Details" />
+                <inputs bindingRef="_voqSc_139" id="_voqSc_154" name="Supplier_Details" />
+                <inputs id="_voqSc_157" name="Assignee" />
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition" description="Reject Goods" name="RejectGoods" xmlns:cafienne="org.cafienne">
+                        <input id="_fmw2_Receipt_Details" name="Receipt_Details" />
+                        <input id="_x6If_Purchase_Details" name="Purchase_Details" />
+                        <input id="_6Pvd_Supplier_Details" name="Supplier_Details" />
+                        <input id="_8UC2_Assignee" name="Assignee" />
+                        <task-model>{
+	"schema": {
+		"title": "Reject Goods",
+		"type": "object",
+		"required": [
+			"Receipt_Details"
+		],
+
+		"properties": {
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					},
+					"Inspection_Results": {
+						"title": "Inspection Results",
+						"type": "string",
+						"description": "Inspection Results"
+					}
+				}
+			},
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment Details"
+					}
+				}
+			},
+			"Supplier_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+
+		},
+		"Receipt_Details": {
+          	"ui:order": ["Receipt_Number", "Inspection_Results"],
+			"Receipt_Number": {
+				"ui:readonly": true
+			},
+          	"Inspection_Results": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+              	"ui:widget": "textarea",
+				"ui:readonly": true
+			}
+		}
+	}
+}</task-model>
+                        <parameterMapping id="_voqSc_146" sourceRef="_voqSc_85" targetRef="_fmw2_Receipt_Details" />
+                        <parameterMapping id="_voqSc_152" sourceRef="_voqSc_150" targetRef="_x6If_Purchase_Details" />
+                        <parameterMapping id="_voqSc_155" sourceRef="_voqSc_154" targetRef="_6Pvd_Supplier_Details" />
+                        <parameterMapping id="_voqSc_159" sourceRef="_voqSc_157" targetRef="_8UC2_Assignee">
+                            <transformation id="_voqSc_163" language="spel" name="Expression_6">
+                                <body>
+                                caseInstance.getCaseTeam().getMemberWithRole("QCClerk")
+                            </body>
+                            </transformation>
+                        </parameterMapping>
+                    </cafienne:implementation>
+                </extensionElements>
+            </humanTask>
+            <processTask id="pt__voqSc_0" isBlocking="true" name="Get Supplier Contact Number from ERP" processRef="GetSupplierContactNumberfromERP.process">
+                <inputs bindingRef="_voqSc_22" id="_voqSc_43" name="Register_Arrival" />
+                <outputs bindingRef="_voqSc_140" id="_voqSc_46" name="SPhoneNumber">
+                    <bindingRefinement id="_voqSc_47" language="spel" name="Expression_27">
+                        <body>
+                        Supplier_Phone.Supplier_Phone
+                    </body>
+                    </bindingRefinement>
+                </outputs>
+                <parameterMapping id="_voqSc_44" sourceRef="_voqSc_43" targetRef="_XiEI_Register_Arrival" />
+                <parameterMapping id="_voqSc_45" sourceRef="_4fMa_SPhoneNumber" targetRef="_voqSc_46" />
+            </processTask>
+            <milestone id="ms__voqSc_0" name="Arrival Registration Completed" />
+            <milestone id="ms__voqSc_1" name="Inspection Completed" />
+            <milestone id="ms__voqSc_2" name="Goods Received Receipt Issued" />
+            <milestone id="ms__voqSc_4" name="Shipment Receipt Obtained" />
+            <milestone id="ms__voqSc_5" name="Storage location determined" />
+            <milestone id="ms__voqSc_3" name="Goods Rejected" />
+            <stage autoComplete="true" id="_voqSc_9" name="Obtaining Shipment Receipt">
+                <planItem definitionRef="ht__voqSc_1" id="pi_ht__voqSc_1" name="Check Paperwork Available from Driver" />
+                <planItem definitionRef="pt__voqSc_0" entryCriteriaRefs="crit__voqSc_15" id="pi_pt__voqSc_0" name="Get Supplier Contact Number from ERP" />
+                <planItem definitionRef="ht__voqSc_11" entryCriteriaRefs="crit__voqSc_5" id="pi_ht__voqSc_11" name="Call Supplier and confirm Paperwork receipt via Email" />
+                <planItem definitionRef="ht__voqSc_10" entryCriteriaRefs="crit__voqSc_3 crit__voqSc_4" id="pi_ht__voqSc_10" name="Register Shipment Receipt" />
+                <sentry id="crit__voqSc_3" name="Sentry_3">
+                    <ifPart contextRef="_voqSc_11" id="_voqSc_199" name="IfPart_1">
+                        <condition id="_voqSc_200" language="spel" name="Expression_1">
+                            <body>
+                            Paperwork_Available_Response.Paperwork_Available_Response_Status =="Available"
+                        </body>
+                        </condition>
+                    </ifPart>
+                    <planItemOnPart id="_voqSc_174" name="PlanItemOnPart_3" sourceRef="pi_ht__voqSc_1">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+                <sentry id="crit__voqSc_4" name="Sentry_4">
+                    <ifPart contextRef="_voqSc_11" id="_voqSc_201" name="IfPart_2">
+                        <condition id="_voqSc_202" language="spel" name="Expression_2">
+                            <body>
+                            Paperwork_Available_Response.Paperwork_Available_Response_Status =="Available"
+                        </body>
+                        </condition>
+                    </ifPart>
+                    <planItemOnPart id="_voqSc_175" name="PlanItemOnPart_4" sourceRef="pi_ht__voqSc_11">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+                <sentry id="crit__voqSc_5" name="Sentry_5">
+                    <planItemOnPart id="_voqSc_176" name="PlanItemOnPart_5" sourceRef="pi_pt__voqSc_0">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+                <sentry id="crit__voqSc_15" name="Sentry_15">
+                    <ifPart contextRef="_voqSc_11" id="_voqSc_197" name="IfPart_0">
+                        <condition id="_voqSc_198" language="spel" name="Expression_0">
+                            <body>
+                            Paperwork_Available_Response.Paperwork_Available_Response_Status =="Unavailable"
+                        </body>
+                        </condition>
+                    </ifPart>
+                    <planItemOnPart id="_voqSc_186" name="PlanItemOnPart_15" sourceRef="pi_ht__voqSc_1">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+            </stage>
+            <stage autoComplete="true" id="_voqSc_20" name="Issuing Goods Received Receipt">
+                <planItem definitionRef="ht__voqSc_2" id="pi_ht__voqSc_2" name="Receive Goods" />
+                <planItem definitionRef="ht__voqSc_3" entryCriteriaRefs="crit__voqSc_7" id="pi_ht__voqSc_3" name="Check if inspection required" />
+                <sentry id="crit__voqSc_7" name="Sentry_7">
+                    <planItemOnPart id="_voqSc_178" name="PlanItemOnPart_7" sourceRef="pi_ht__voqSc_2">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+            </stage>
+            <stage autoComplete="true" id="_voqSc_32" name="Inspecting the Goods">
+                <planItem definitionRef="ht__voqSc_8" id="pi_ht__voqSc_8" name="Inspect Goods" />
+                <planItem definitionRef="ht__voqSc_7" entryCriteriaRefs="crit__voqSc_23" id="pi_ht__voqSc_7" name="Check Reject Goods" />
+                <sentry id="crit__voqSc_23" name="Sentry_23">
+                    <ifPart contextRef="_voqSc_40" id="_voqSc_141" name="IfPart_12">
+                        <condition id="_voqSc_143" language="spel" name="Expression_18">
+                            <body>
+                            Receipt_Details.Inspection_Results=="Rejected"
+                        </body>
+                        </condition>
+                    </ifPart>
+                    <planItemOnPart id="_voqSc_134" name="PlanItemOnPart_17" sourceRef="pi_ht__voqSc_8">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+            </stage>
+            <stage autoComplete="true" id="_voqSc_34" name="Determining the storage location">
+                <planItem definitionRef="ht__voqSc_5" entryCriteriaRefs="crit__voqSc_8 crit__voqSc_24" id="pi_ht__voqSc_5" name="Determine Storage Location" />
+                <planItem definitionRef="ht__voqSc_4" entryCriteriaRefs="crit__voqSc_13" id="pi_ht__voqSc_4" name="Put away goods to project location" />
+                <planItem definitionRef="ht__voqSc_6" entryCriteriaRefs="crit__voqSc_14" id="pi_ht__voqSc_6" name="Put away goods to anonymous storage location" />
+                <planItem definitionRef="ht__voqSc_13" entryCriteriaRefs="crit__voqSc_17" id="pi_ht__voqSc_13" name="Put away goods to Quarantine or Rejection storage location" />
+                <sentry id="crit__voqSc_13" name="Sentry_13">
+                    <ifPart contextRef="_voqSc_177" id="_voqSc_215" name="IfPart_9">
+                        <condition id="_voqSc_216" language="spel" name="Expression_9">
+                            <body>
+                            Project_Goods_Storage_Location.Project_Goods_Storage_Location == "Project"
+                        </body>
+                        </condition>
+                    </ifPart>
+                    <planItemOnPart id="_voqSc_184" name="PlanItemOnPart_13" sourceRef="pi_ht__voqSc_5">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+                <sentry id="crit__voqSc_14" name="Sentry_14">
+                    <ifPart contextRef="_voqSc_177" id="_voqSc_217" name="IfPart_10">
+                        <condition id="_voqSc_218" language="spel" name="Expression_10">
+                            <body>
+                            Project_Goods_Storage_Location.Project_Goods_Storage_Location == "Anonymous"
+                        </body>
+                        </condition>
+                    </ifPart>
+                    <planItemOnPart id="_voqSc_185" name="PlanItemOnPart_14" sourceRef="pi_ht__voqSc_5">
+                        <standardEvent>complete</standardEvent>
+                    </planItemOnPart>
+                </sentry>
+                <sentry id="crit__voqSc_8" name="Sentry_8">
+                    <ifPart contextRef="_voqSc_40" id="_voqSc_75" name="IfPart_7">
+                        <condition id="_voqSc_94" language="spel" name="Expression_16">
+                            <body>
+                            Receipt_Details.Inspection_Results== "Inspected"
+                        </body>
+                        </condition>
+                    </ifPart>
+                </sentry>
+                <sentry id="crit__voqSc_17" name="Sentry_17">
+                    <ifPart contextRef="_voqSc_40" id="_voqSc_133" name="IfPart_11">
+                        <condition id="_voqSc_142" language="spel" name="Expression_20">
+                            <body>
+                            Receipt_Details.Inspection_Results=="Rejected"
+                        </body>
+                        </condition>
+                    </ifPart>
+                </sentry>
+                <sentry id="crit__voqSc_24" name="Sentry_24">
+                    <ifPart contextRef="_voqSc_42" id="_voqSc_164" name="IfPart_6">
+                        <condition id="_voqSc_165" language="spel" name="Expression_22">
+                            <body>
+                            Inspection_Required.Inspection_Required_Status== "No"
+                        </body>
+                        </condition>
+                    </ifPart>
+                </sentry>
+            </stage>
+        </casePlanModel>
+        <caseRoles description="Requestor" id="_voqSc_232" name="Requestor" />
+        <caseRoles description="Purchase Clerk" id="_voqSc_233" name="PurchaseClerk" />
+        <caseRoles description="Warehousing Clerk" id="_voqSc_234" name="WarehousingClerk" />
+        <caseRoles description="QC Clerk" id="_voqSc_235" name="QCClerk" />
+    </case>
+    <process description="Get Supplier Contact  Number from ERP" id="GetSupplierContactNumberfromERP.process" name="GetSupplierContactNumberfromERP">
+        <input id="_XiEI_Register_Arrival" name="Register_Arrival" />
+        <output id="_4fMa_SPhoneNumber" name="SPhoneNumber" />
+        <extensionElements>
+            <cafienne:implementation async="true" class="org.cafienne.cmmn.instance.process.http.HTTPCallDefinition" xmlns:cafienne="org.cafienne">
+                <url>http://host.docker.internal:3335/usermappings/${Register_Arrival.Supplier_Name}</url>
+                <method>GET</method>
+                <http-headers>
+                    <http-header name="Content-Type">application/json</http-header>
+                </http-headers>
+                <parameterMapping sourceRef="responsePayload" targetRef="SPhoneNumber">
+                    <transformation language="json">
+                        <body>$..SPhoneNumber</body>
+                    </transformation>
+                </parameterMapping>
+            </cafienne:implementation>
+        </extensionElements>
+    </process>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="register_arrival.cfid" name="register_arrival">
+        <property name="Truck_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Driver_Name" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Driver_ID" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Driver_Details" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Supplier_Name" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="paperwork_available_response.cfid" name="paperwork_available_response">
+        <property name="Paperwork_Available_Response_Status" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="purchase_details.cfid" name="purchase_details">
+        <property name="Purchase_Order_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Purchase_Order_Date" type="http://www.omg.org/spec/CMMN/PropertyType/date" />
+        <property name="Shipment_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Shipment_Details" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="receipt_details.cfid" name="receipt_details">
+        <property name="Receipt_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Inspection_Results" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="inspection_required.cfid" name="inspection_required">
+        <property name="Inspection_Required_Status" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="inspection_status.cfid" name="inspection_status">
+        <property name="Inspection_Status" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="put_away_advice_number.cfid" name="put_away_advice_number">
+        <property name="Put_Away_Advice_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="supplier_details.cfid" name="supplier_details">
+        <property name="Supplier_Name" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+        <property name="Supplier_Address" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="supplier_phone.cfid" name="supplier_phone">
+        <property name="Supplier_Phone" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <caseFileItemDefinition definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified" id="project_goods_storage_location.cfid" name="project_goods_storage_location">
+        <property name="Project_Goods_Storage_Location" type="http://www.omg.org/spec/CMMN/PropertyType/string" />
+    </caseFileItemDefinition>
+    <CMMNDI>
+        <CMMNDiagram>
+            <CMMNShape cmmnElementRef="cm__voqSc_0" name="PurchaseReceiptFlow">
+                <Bounds height="1320" width="1130" x="10" y="10" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_0" name="Register Arrival">
+                <Bounds height="60" width="100" x="50" y="50" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ms__voqSc_0" name="Arrival Registration Completed">
+                <Bounds height="40" width="170" x="40" y="160" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_0" name="Sentry_0">
+                <Bounds height="20" width="12" x="84" y="150" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi__voqSc_9" name="Obtaining Shipment Receipt">
+                <Bounds height="360" width="690" x="250" y="90" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_1" name="Check Paperwork Available from Driver">
+                <Bounds height="60" width="240" x="300" y="130" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_pt__voqSc_0" name="Get Supplier Contact Number from ERP">
+                <Bounds height="60" width="240" x="300" y="270" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi__voqSc_20" name="Issuing Goods Received Receipt">
+                <Bounds height="300" width="390" x="530" y="540" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_2" name="Receive Goods">
+                <Bounds height="60" width="170" x="650" y="620" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_3" name="Check if inspection required">
+                <Bounds height="60" width="230" x="620" y="740" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi__voqSc_32" name="Inspecting the Goods">
+                <Bounds height="270" width="490" x="460" y="940" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi__voqSc_34" name="Determining the storage location">
+                <Bounds height="420" width="420" x="30" y="550" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_4" name="Put away goods to project location">
+                <Bounds height="60" width="270" x="50" y="600" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_5" name="Determine Storage Location">
+                <Bounds height="60" width="170" x="230" y="680" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_6" name="Put away goods to anonymous storage location">
+                <Bounds height="60" width="270" x="50" y="780" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_8" name="Inspect Goods">
+                <Bounds height="60" width="150" x="620" y="980" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_10" name="Register Shipment Receipt">
+                <Bounds height="60" width="240" x="620" y="130" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_11" name="Call Supplier and confirm Paperwork receipt via Email">
+                <Bounds height="60" width="310" x="610" y="270" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_3" name="Sentry_3">
+                <Bounds height="20" width="12" x="614" y="160" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_4" name="Sentry_4">
+                <Bounds height="20" width="12" x="724" y="180" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_5" name="Sentry_5">
+                <Bounds height="20" width="12" x="604" y="290" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_7" name="Sentry_7">
+                <Bounds height="20" width="12" x="724" y="730" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_13" name="Sentry_13">
+                <Bounds height="20" width="12" x="164" y="650" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_14" name="Sentry_14">
+                <Bounds height="20" width="12" x="164" y="770" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_15" name="Sentry_15">
+                <Bounds height="20" width="12" x="414" y="260" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_12" name="Sentry_12">
+                <Bounds height="20" width="12" x="834" y="930" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ms__voqSc_1" name="Inspection Completed">
+                <Bounds height="40" width="130" x="500" y="870" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ms__voqSc_2" name="Goods Received Receipt Issued">
+                <Bounds height="40" width="250" x="320" y="480" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_2" name="Sentry_2">
+                <Bounds height="20" width="12" x="534" y="510" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_13" name="Put away goods to Quarantine or Rejection storage location">
+                <Bounds height="60" width="350" x="50" y="870" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ms__voqSc_4" name="Shipment Receipt Obtained">
+                <Bounds height="40" width="220" x="880" y="490" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_6" name="Sentry_6">
+                <Bounds height="20" width="12" x="1024" y="480" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_1" name="Sentry_1">
+                <Bounds height="20" width="12" x="914" y="610" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_11" name="Sentry_11">
+                <Bounds height="20" width="12" x="324" y="540" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ms__voqSc_5" name="Storage location determined">
+                <Bounds height="40" width="160" x="50" y="1050" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_20" name="Sentry_20">
+                <Bounds height="20" width="12" x="84" y="1040" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_22" name="Sentry_22">
+                <Bounds height="20" width="12" x="84" y="1320" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ms__voqSc_3" name="Goods Rejected">
+                <Bounds height="40" width="100" x="280" y="1090" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_16" name="Sentry_16">
+                <Bounds height="20" width="12" x="1134" y="330" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_8" name="Sentry_8">
+                <Bounds height="20" width="12" x="394" y="710" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_17" name="Sentry_17">
+                <Bounds height="20" width="12" x="324" y="920" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_9" name="Sentry_9">
+                <Bounds height="20" width="12" x="554" y="900" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_10" name="Sentry_10">
+                <Bounds height="20" width="12" x="374" y="1100" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_18" name="Sentry_18">
+                <Bounds height="20" width="12" x="444" y="680" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_19" name="Sentry_19">
+                <Bounds height="20" width="12" x="334" y="960" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="pi_ht__voqSc_7" name="Check Reject Goods">
+                <Bounds height="60" width="150" x="620" y="1110" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_23" name="Sentry_23">
+                <Bounds height="20" width="12" x="684" y="1100" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_24" name="Sentry_24">
+                <Bounds height="20" width="12" x="334" y="670" />
+            </CMMNShape>
+            <CMMNShape cmmnElementRef="crit__voqSc_25" name="Sentry_25">
+                <Bounds height="20" width="12" x="244" y="170" />
+            </CMMNShape>
+        </CMMNDiagram>
+    </CMMNDI>
+</definitions>

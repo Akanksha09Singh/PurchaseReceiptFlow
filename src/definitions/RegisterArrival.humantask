@@ -1,0 +1,64 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="RegisterArrival" description="Register Arrival" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_kgVX_Register_Arrival" name="Register_Arrival"/>
+        <input id="_L2bN_Assignee" name="Assignee"/>
+        <output id="_t5x8_Register_Arrival" name="Register_Arrival"/>
+        <task-model>{
+  "schema":{
+    "title": "Register Arrival",
+    "type": "object",
+    "required": [
+			"Register_Arrival"
+		],
+   
+    "properties":{
+      "Register_Arrival":{
+        "title": "Register Arrival",
+        "type": "object",
+        "properties":{
+          "Truck_Number":{
+            "title": "Truck Number",
+            "type": "string",
+            "description": "Truck Number"
+          },
+           "Driver_ID":{
+            "title": "Driver ID",
+            "type": "string",
+            "description": "Driver ID"
+          },
+          "Driver_Name": {
+            "title": "Driver Name",
+            "type": "string",
+            "description": "Driver Name"
+          },
+           "Driver_Details":{
+            "title": "Driver Details",
+            "type": "string",
+            "description": "Driver Details"
+          },
+           "Supplier_Name":{
+            "title": "Supplier Name",
+            "type": "string",
+            "enumNames":[
+              "Lana",
+              "Suzy",
+              "Admin"
+            ],
+            "enum":[
+              "lana",
+              "suzy",
+              "admin"
+            ]
+          }
+          }
+      }
+    }
+  },
+	"uiSchema": {
+		"Register_Arrival": {
+			"ui:order": ["Truck_Number", "Driver_ID", "Driver_Name", "Driver_Details", "Supplier_Name"]
+		}
+	}
+}</task-model>
+    </cafienne:implementation>
+</humantask>

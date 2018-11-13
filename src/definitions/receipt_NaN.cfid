@@ -1,0 +1,4 @@
+<caseFileItemDefinition name="receipt_NaN" definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified">
+    <property name="Receipt_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Receipt_Status" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+</caseFileItemDefinition>

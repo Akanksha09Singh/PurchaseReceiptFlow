@@ -1,0 +1,18 @@
+<process name="GetSupplierContactNumberfromERP" description="Get Supplier Contact  Number from ERP">
+    <input id="_XiEI_Register_Arrival" name="Register_Arrival"/>
+    <output id="_4fMa_SPhoneNumber" name="SPhoneNumber"/>
+    <extensionElements>
+        <cafienne:implementation xmlns:cafienne="org.cafienne" class="org.cafienne.cmmn.instance.process.http.HTTPCallDefinition" async="true">
+            <url>http://host.docker.internal:3335/usermappings/${Register_Arrival.Supplier_Name}</url>
+            <method>GET</method>
+            <http-headers>
+                <http-header name="Content-Type">application/json</http-header>
+            </http-headers>
+            <parameterMapping sourceRef="responsePayload" targetRef="SPhoneNumber">
+                <transformation language="json">
+                    <body>$..SPhoneNumber</body>
+                </transformation>
+            </parameterMapping>
+        </cafienne:implementation>
+    </extensionElements>
+</process>

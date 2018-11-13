@@ -1,0 +1,4 @@
+<caseFileItemDefinition name="receipt_details" definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified">
+    <property name="Receipt_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Inspection_Results" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+</caseFileItemDefinition>

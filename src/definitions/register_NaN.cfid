@@ -1,0 +1,8 @@
+<caseFileItemDefinition name="register_NaN" definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified">
+    <property name="Truck_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Driver_Name" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Driver_ID" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Driver_Details" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Supplier_Name" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Arrival_Status" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+</caseFileItemDefinition>

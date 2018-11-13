@@ -1,0 +1,35 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="GoodsInspectionResult" description="Goods Inspection Result" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_1kxr_Inspection_Status" name="Inspection_Status"/>
+        <output id="_t4bq_Inspection_Status" name="Inspection_Status"/>
+        <input id="_mHoc_Assignee" name="Assignee"/>
+        <task-model>{
+  "schema":{
+    "title": "Goods Inspection Result",
+    "type": "object",
+    "required":[ 
+      "Inspection_Status"
+    ],
+    "properties":{
+      "Inspection_Status":{
+        "title": "Inspection Status",
+        "type": "object",
+        "properties":{
+          "Inspection_Status":{
+            "title": "Enter Inspection Status",
+            "type": "string",
+            "enumNames": [
+             "Inspected",
+              "No"],
+            "enum": [
+              "Yes",
+              "No"]
+          }
+        }
+      }
+       
+    }
+  }
+}</task-model>
+    </cafienne:implementation>
+</humantask>

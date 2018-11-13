@@ -1,0 +1,83 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="RegisterShipmentReceipt" description="Register Shipment Receipt" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_tnim_Purchase_Details" name="Purchase_Details"/>
+        <output id="_gaxV_Purchase_Details" name="Purchase_Details"/>
+        <input id="_bdPx_Supplier_Details" name="Supplier_Details"/>
+        <output id="_ZkOU_Supplier_Details" name="Supplier_Details"/>
+        <input id="_8bSG_Assignee" name="Assignee"/>
+        <task-model>{
+  "schema":{
+    "title": "Register Shipment Receipt",
+    "type": "object",
+    "required": [
+			"Purchase_Details","Supplier_Details"
+		],
+   
+    "properties":{
+      "Purchase_Details":{
+        "title": "Purchase Details",
+        "type": "object",
+        "properties":{
+          "Purchase_Order_Number":{
+            "title": "Enter Purchase Order Number",
+            "type": "string",
+            "description": "Purchase Order Number"
+          },
+          "Purchase_Order_Date": {
+            "title": "Enter Purchase Order Date",
+            "type": "string",
+            "format": "date",
+            "description": "Purchase Order Date"
+          },
+           "Shipment_Number":{
+            "title": "Enter Shipment Number",
+            "type": "string",
+            "description": "Shipment Number"
+          },
+           "Shipment_Details":{
+            "title": "Enter Shipment Details",
+            "type": "string",
+            "description": "Shipment Details"
+          }
+           
+          }
+      },
+         "Supplier_Details":{
+        "title": "Supplier Details",
+        "type": "object",
+        "properties":{
+          "Supplier_Name":{
+            "title": "Enter Supplier Name",
+            "type": "string",
+            "enumNames":[
+              "Lana",
+              "Suzy",
+              "Admin"
+            ],
+            "enum":[
+              "lana",
+              "suzy",
+              "admin"
+            ]
+          },
+          "Supplier_Address":{
+            "title": "Enter Supplier Address",
+            "type": "string",
+            "description": "Supplier Address"
+          }
+        }
+      }
+    }
+  },
+	"uiSchema": {
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"]
+		},
+      "Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+        	"Supplier_Address": {"ui:widget": "textarea"}
+		}
+    }
+}</task-model>
+    </cafienne:implementation>
+</humantask>

@@ -1,0 +1,68 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="CallSupplierandconfirmPaperworkreceiptviaEmail" description="Call Supplier and confirm Paperwork  receipt via Email" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <output id="_LuJU_Message" name="Paperwork_Available_Response"/>
+        <input id="_NGE6_Register_Arrival" name="Paperwork_Available_Response"/>
+        <input id="_wlaJ_Assignee" name="Assignee"/>
+        <input id="_3STA_Register_Arrival" name="Register_Arrival"/>
+        <input id="_Ux18_Supplier_Phone" name="Supplier_Phone"/>
+        <task-model>{
+  "schema":{
+    "title": "Call Supplier And Confirm Paperwork Receipt via Email",
+    "type": "object",
+    "required": [
+			"Paperwork_Available_Response"
+		],
+   
+    "properties":{
+      "Register_Arrival": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					}
+				}
+			},
+       "Supplier_Phone": {
+				"type": "object",
+         		"properties": {
+					"Supplier_Phone": {
+						"title": "Supplier PhoneNumber",
+						"type": "string",
+						"description": "Supplier PhoneNumber"
+					}
+				}
+			},
+         "Paperwork_Available_Response":{
+        "title": "Paperwork Available Response",
+        "type": "object",
+        "properties":{
+          "Paperwork_Available_Response_Status":{
+            "title": "Enter Paperwork Available status",
+            "type": "string",
+            "enum":[
+              "Available",
+              "Unavailable"
+            ]
+          }
+        }
+      }      
+    }
+  },
+	"uiSchema": {
+		"Register_Arrival": {
+			"Supplier_Name": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Phone": {
+			"Supplier_Phone": {
+				"ui:readonly": true
+			}
+		}
+	}
+}</task-model>
+    </cafienne:implementation>
+</humantask>

@@ -1,0 +1,122 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="InspectGoods" description="Inspect Goods" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_dREW_Receipt_Details" name="Receipt_Details"/>
+        <input id="_UX8g_Purchase_Details" name="Purchase_Details"/>
+        <input id="_eQc3_Supplier_Details" name="Supplier_Details"/>
+        <output id="_uMMz_Receipt_Details" name="Receipt_Details"/>
+        <input id="_YFVi_Assignee" name="Assignee"/>
+        <task-model>{
+	"schema": {
+		"title": "Inspect Goods",
+		"type": "object",
+		"required": [
+			"Receipt_Details"
+		],
+
+		"properties": {
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					},
+					"Inspection_Results": {
+						"title": "Inspection Results",
+						"type": "string",
+						"enumNames": [
+							"Inspected",
+							"Rejected"
+						],
+						"enum": [
+							"Inspected",
+							"Rejected"
+						]
+					}
+				}
+			},
+			"Purchase_Details": {
+				"title": "Purchase Details",
+				"type": "object",
+				"properties": {
+					"Purchase_Order_Number": {
+						"title": "Purchase Order Number",
+						"type": "string",
+						"description": "Purchase Order Number"
+					},
+					"Purchase_Order_Date": {
+						"title": "Purchase Order Date",
+						"type": "string",
+						"format": "date",
+						"description": "Purchase Order Date"
+					},
+					"Shipment_Number": {
+						"title": "Shipment Number",
+						"type": "string",
+						"description": "Shipment Number"
+					},
+					"Shipment_Details": {
+						"title": "Shipment Details",
+						"type": "string",
+						"description": "Shipment Details"
+					}
+				}
+			},
+			"Supplier_Details": {
+				"title": "Supplier Details",
+				"type": "object",
+				"properties": {
+					"Supplier_Name": {
+						"title": "Supplier Name",
+						"type": "string",
+						"description": "Supplier Name"
+					},
+					"Supplier_Address": {
+						"title": "Supplier Address",
+						"type": "string",
+						"description": "Supplier Address"
+					}
+				}
+			}
+		}
+	},
+	"uiSchema": {
+		"Receipt_Details": {
+			"ui:order": ["Receipt_Number", "Inspection_Results"],
+			"Receipt_Number": {
+				"ui:readonly": true
+			}
+		},
+		"Supplier_Details": {
+			"ui:order": ["Supplier_Name", "Supplier_Address"],
+			"Supplier_Name": {
+				"ui:readonly": true
+			},
+			"Supplier_Address": {
+				"ui:widget": "textarea",
+				"ui:readonly": true
+			}
+
+		},
+		"Purchase_Details": {
+			"ui:order": ["Purchase_Order_Number", "Purchase_Order_Date", "Shipment_Number", "Shipment_Details"],
+			"Purchase_Order_Number": {
+				"ui:readonly": true
+			},
+			"Purchase_Order_Date": {
+				"ui:readonly": true
+			},
+			"Shipment_Number": {
+				"ui:readonly": true
+			},
+			"Shipment_Details": {
+				"ui:readonly": true
+			}
+
+		}
+	}
+}</task-model>
+    </cafienne:implementation>
+</humantask>

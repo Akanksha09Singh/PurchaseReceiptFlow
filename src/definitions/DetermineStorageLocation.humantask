@@ -1,0 +1,33 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="DetermineStorageLocation" description="Determine Storage  Location" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_9wsw_Assignee" name="Assignee"/>
+        <input id="_aEmy_Project_Goods_Storage_Location" name="Project_Goods_Storage_Location"/>
+        <output id="_NwaN_Project_Goods_Storage_Location" name="Project_Goods_Storage_Location"/>
+        <task-model>{
+  "schema":{
+    "title": "Determine Storage Location ",
+    "type": "object",
+    "required":[ 
+      "Project_Goods_Storage_Location"
+    ],
+    "properties":{
+       "Project_Goods_Storage_Location": {
+        "title": "Project Goods Storage Location",
+        "type": "object",
+        "properties": {
+          "Project_Goods_Storage_Location": {
+            "title": "Enter the Project Goods Storage Location",
+            "type": "string",
+            "enum": [
+              "Project",
+              "Anonymous"
+            ]
+          }
+        }
+      }
+      
+    }
+  }
+}</task-model>
+    </cafienne:implementation>
+</humantask>

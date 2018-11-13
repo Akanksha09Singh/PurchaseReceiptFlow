@@ -1,0 +1,51 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="ReturnGoods" description="Return Goods" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_T2QS_Register_Arrival" name="Register_Arrival"/>
+        <input id="_RZp8_Assignee" name="Assignee"/>
+        <task-model>{
+  "schema":{
+    "title": "Return Goods",
+    "type": "object",
+   
+    "properties":{
+      "Register_Arrival":{
+        "title": "Return Goods Details",
+        "type": "object",
+        "properties":{
+          "Truck_Number":{
+            "title": "Truck Number",
+            "type": "string",
+            "description": "Truck Number"
+          },
+           "Driver_ID":{
+            "title": "Driver ID",
+            "type": "string",
+            "description": "Driver ID"
+          },
+          "Driver_Name": {
+            "title": "Driver Name",
+            "type": "string",
+            "description": "Driver Name"
+          },
+           "Driver_Details":{
+            "title": "Driver Details",
+            "type": "string",
+            "description": "Driver Details"
+          },
+           "Supplier_Name":{
+            "title": "Supplier Name",
+            "type": "string",
+            "description": "Supplier Name"
+          }
+          }
+      }
+    }
+  },
+	"uiSchema": {
+		"Register_Arrival": {
+			"ui:order": ["Truck_Number", "Driver_Name", "Driver_ID", "Driver_Details", "Supplier_Name"]
+		}
+	}
+}</task-model>
+    </cafienne:implementation>
+</humantask>

@@ -1,0 +1,6 @@
+<caseFileItemDefinition name="purchase_details" definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified">
+    <property name="Purchase_Order_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Purchase_Order_Date" type="http://www.omg.org/spec/CMMN/PropertyType/date"/>
+    <property name="Shipment_Number" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Shipment_Details" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+</caseFileItemDefinition>

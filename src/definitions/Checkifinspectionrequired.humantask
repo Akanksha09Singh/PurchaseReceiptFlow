@@ -1,0 +1,55 @@
+<humantask>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="Checkifinspectionrequired" description="Check if inspection required" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <output id="_1PqV_Inspection_Required" name="Inspection_Required"/>
+        <input id="_vQLs_Receipt_Details" name="Receipt_Details"/>
+        <input id="_kgYk_Assignee" name="Assignee"/>
+        <task-model>{
+	"schema": {
+		"title": "Check If Inspection Required",
+		"type": "object",
+		"required": [
+			"Inspection_Required"
+		],
+		"properties": {
+			"Receipt_Details": {
+				"title": "Receipt Details",
+				"type": "object",
+				"properties": {
+					"Receipt_Number": {
+						"title": "Receipt Number",
+						"type": "string",
+						"description": "Receipt Number"
+					}
+				}
+			},
+			"Inspection_Required": {
+				"title": "Inspection Required Status",
+				"type": "object",
+				"properties": {
+					"Inspection_Required_Status": {
+						"title": "Enter the Inspection Required status",
+						"type": "string",
+						"enumNames": [
+							"Yes",
+							"No"
+						],
+						"enum": [
+							"Yes",
+							"No"
+						]
+					}
+				}
+			}
+
+		}
+	},
+	"uiSchema": {
+		"Receipt_Details": {
+			"Receipt_Number": {
+				"ui:readonly": true
+			}
+		}
+	}
+}</task-model>
+    </cafienne:implementation>
+</humantask>
